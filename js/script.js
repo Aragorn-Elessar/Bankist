@@ -90,6 +90,28 @@ const calcDisplayBalance = function (movements) {
 };
 calcDisplayBalance(account1.movements);
 
+// Display summary for in/out/interest
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const outcomes = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov);
+  labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+
+  // Bank gives 1.2% interest for each deposit if the interest is more than 1€
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposite => deposite * 0.012)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
 // Create usernames for account owners
 const createUsernames = function (accs) {
   accs.forEach(
