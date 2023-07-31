@@ -88,21 +88,21 @@ const calcDisplayBalance = function (movements) {
 };
 
 // Display summary for in/out/interest
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov);
   labelSumIn.textContent = `${incomes}€`;
 
-  const outcomes = movements
+  const outcomes = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov);
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;
 
-  // Bank gives 1.2% interest for each deposit if the interest is more than 1€
-  const interest = movements
+  // Bank gives a percentage interest for each deposit if the interest is more than 1€
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposite => deposite * 0.012)
+    .map(deposite => (deposite * acc.interestRate) / 100)
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int);
   labelSumInterest.textContent = `${interest}€`;
@@ -152,5 +152,5 @@ btnLogin.addEventListener('click', function (e) {
   calcDisplayBalance(currentAccount.movements);
 
   // Display summary
-  calcDisplaySummary(currentAccount.movements);
+  calcDisplaySummary(currentAccount);
 });
