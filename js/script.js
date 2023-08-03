@@ -82,9 +82,9 @@ const displayMovements = function (movements) {
 };
 
 // Calculate and display total balance
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 
 // Display summary for in/out/interest
@@ -149,8 +149,42 @@ btnLogin.addEventListener('click', function (e) {
   displayMovements(currentAccount.movements);
 
   // Display balance
-  calcDisplayBalance(currentAccount.movements);
+  calcDisplayBalance(currentAccount);
 
   // Display summary
   calcDisplaySummary(currentAccount);
+});
+
+// Money transfer functionality
+btnTransfer.addEventListener('click', function updateBalance(e) {
+  // Prevent from submitting
+  e.preventDefault();
+  const moneyRecipient = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  const amount = Number(inputTransferAmount.value);
+
+  // Clear input fields
+  inputTransferTo.value = inputTransferAmount.value = '';
+  inputTransferAmount.blur();
+
+  if (
+    amount > 0 &&
+    moneyRecipient &&
+    currentAccount.balance >= amount &&
+    moneyRecipient.username !== currentAccount.username
+  ) {
+    // Update sender/recipient movements
+    currentAccount.movements.push(-amount);
+    moneyRecipient.movements.push(amount);
+
+    // Display movements
+    displayMovements(currentAccount.movements);
+
+    // Display balance
+    calcDisplayBalance(currentAccount);
+
+    // Display summary
+    calcDisplaySummary(currentAccount);
+  }
 });
