@@ -121,6 +121,17 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+
+  // Display balance
+  calcDisplayBalance(acc);
+
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
 // Event handler
 let currentAccount;
 
@@ -145,14 +156,8 @@ btnLogin.addEventListener('click', function (e) {
   }`;
   containerApp.style.opacity = 100;
 
-  // Display movements
-  displayMovements(currentAccount.movements);
-
-  // Display balance
-  calcDisplayBalance(currentAccount);
-
-  // Display summary
-  calcDisplaySummary(currentAccount);
+  // Update UI
+  updateUI(currentAccount);
 });
 
 // Money transfer functionality
@@ -178,13 +183,7 @@ btnTransfer.addEventListener('click', function updateBalance(e) {
     currentAccount.movements.push(-amount);
     moneyRecipient.movements.push(amount);
 
-    // Display movements
-    displayMovements(currentAccount.movements);
-
-    // Display balance
-    calcDisplayBalance(currentAccount);
-
-    // Display summary
-    calcDisplaySummary(currentAccount);
+    // Update UI
+    updateUI(currentAccount);
   }
 });
