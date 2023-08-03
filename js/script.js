@@ -187,6 +187,25 @@ btnTransfer.addEventListener('click', function updateBalance(e) {
   }
 });
 
+// Request loan
+btnLoan.addEventListener('click', function provideLoan(e) {
+  e.preventDefault();
+
+  const loan = Number(inputLoanAmount.value);
+
+  // Grant loan if one deposit with at least 10% of the requested loan amount exists
+  if (loan > 0 && currentAccount.movements.some(mov => mov >= loan * 0.1)) {
+    currentAccount.movements.push(loan);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+
+  // Clear input fields
+  inputLoanAmount.value = inputClosePin.value = '';
+  inputLoanAmount.blur();
+});
+
 // Close account handling
 btnClose.addEventListener('click', function deleteAccount(e) {
   e.preventDefault();
