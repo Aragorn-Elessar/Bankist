@@ -142,9 +142,8 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
 
-  currentAccount?.pin === Number(inputLoginPin.value) && console.log('Login');
+  currentAccount?.pin === Number(inputLoginPin.value);
 
   // Clear input fields
   inputLoginPin.value = inputLoginUsername.value = '';
