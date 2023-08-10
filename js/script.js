@@ -193,7 +193,7 @@ btnTransfer.addEventListener('click', function updateBalance(e) {
 btnLoan.addEventListener('click', function provideLoan(e) {
   e.preventDefault();
 
-  const loan = Number(inputLoanAmount.value);
+  const loan = Math.floor(inputLoanAmount.value);
 
   // Grant loan if one deposit with at least 10% of the requested loan amount exists
   if (loan > 0 && currentAccount.movements.some(mov => mov >= loan * 0.1)) {
