@@ -232,6 +232,10 @@ btnTransfer.addEventListener('click', function updateBalance(e) {
     currentAccount.movements.push(-amount);
     moneyRecipient.movements.push(amount);
 
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date());
+    moneyRecipient.movementsDates.push(new Date());
+
     // Update UI
     updateUI(currentAccount);
   }
