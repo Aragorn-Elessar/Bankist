@@ -251,6 +251,9 @@ btnLoan.addEventListener('click', function provideLoan(e) {
   if (loan > 0 && currentAccount.movements.some(mov => mov >= loan * 0.1)) {
     currentAccount.movements.push(loan);
 
+    // Add loan date
+    currentAccount.movementsDates.push(new Date());
+
     // Update UI
     updateUI(currentAccount);
   }
