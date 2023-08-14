@@ -156,12 +156,20 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatNumber(
+    acc.balance,
+    acc.currency,
+    acc.locale
+  )}`;
 
   const outcomes = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov);
-  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
+  labelSumOut.textContent = `${formatNumber(
+    Math.abs(outcomes),
+    acc.currency,
+    acc.locale
+  )}`;
 
   // Bank gives a percentage interest for each deposit if the interest is more than 1€
   const interest = acc.movements
@@ -169,7 +177,11 @@ const calcDisplaySummary = function (acc) {
     .map(deposite => (deposite * acc.interestRate) / 100)
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${formatNumber(
+    interest,
+    acc.currency,
+    acc.locale
+  )}`;
 };
 
 // Create usernames for account owners
