@@ -104,11 +104,10 @@ const formatMovementDate = function (date, locale) {
 
 // Display numbers using internationalized format
 const formatNumber = function (num, currency, locale) {
-  const options = {
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: currency,
-  };
-  return new Intl.NumberFormat(locale, options).format(num);
+  }).format(num);
 };
 
 // Display deposite/withdrawal movements for account
