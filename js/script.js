@@ -102,6 +102,15 @@ const formatMovementDate = function (date, locale) {
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
+// Display numbers using internationalized format
+const formatNumber = function (num, currency, locale) {
+  const options = {
+    style: 'currency',
+    currency: currency,
+  };
+  return new Intl.NumberFormat(locale, options).format(num);
+};
+
 // Display deposite/withdrawal movements for account
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
@@ -116,13 +125,15 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const displayNumber = formatNumber(mov, acc.currency, acc.locale);
+
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
     <div class="movements__date">${displayDate}</div>
-      <div class="movements__value">${mov.toFixed(2)}€</div>
+      <div class="movements__value">${displayNumber}</div>
     </div>
     `;
 
