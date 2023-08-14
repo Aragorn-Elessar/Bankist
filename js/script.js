@@ -144,7 +144,11 @@ const displayMovements = function (acc, sort = false) {
 // Calculate and display total balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = `${formatNumber(
+    acc.balance,
+    acc.currency,
+    acc.locale
+  )}`;
 };
 
 // Display summary for in/out/interest
