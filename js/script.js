@@ -295,13 +295,17 @@ btnLoan.addEventListener('click', function provideLoan(e) {
 
   // Grant loan if one deposit with at least 10% of the requested loan amount exists
   if (loan > 0 && currentAccount.movements.some(mov => mov >= loan * 0.1)) {
-    currentAccount.movements.push(loan);
+    // Delay 2.5 sec before granting loan
+    setTimeout(() => {
+      // Add movement
+      currentAccount.movements.push(loan);
 
-    // Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500);
   }
 
   // Clear input fields
