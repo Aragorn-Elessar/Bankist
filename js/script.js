@@ -237,10 +237,13 @@ const startLogOutTimer = function () {
   tick();
   // Call the timer every second
   const timer = setInterval(tick, 1000);
+
+  // To use the clearInterval function, we need the timer variable
+  return timer;
 };
 
 // Event handler
-let currentAccount;
+let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
 currentAccount = account1;
@@ -283,7 +286,9 @@ btnLogin.addEventListener('click', function (e) {
     options
   ).format(now);
 
-  startLogOutTimer();
+  // Timer
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 
   // Update UI
   updateUI(currentAccount);
