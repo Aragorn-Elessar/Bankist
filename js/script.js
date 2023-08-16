@@ -207,6 +207,38 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+// Logout count down timer function
+const startLogOutTimer = function () {
+  const tick = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // In each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    console.log('Ayo!');
+
+    // When 0 seconds, stop timer and log out user
+    if (time === 0 || owner !== currentAccount) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in toget started';
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrease 1s
+    time--;
+  };
+
+  // Set time to 5 min
+  let time = 120;
+  let owner = currentAccount;
+
+  // Call the timer immediately to avoid the delay
+  tick();
+  // Call the timer every second
+  const timer = setInterval(tick, 1000);
+};
+
 // Event handler
 let currentAccount;
 
@@ -250,6 +282,8 @@ btnLogin.addEventListener('click', function (e) {
     currentAccount.locale,
     options
   ).format(now);
+
+  startLogOutTimer();
 
   // Update UI
   updateUI(currentAccount);
