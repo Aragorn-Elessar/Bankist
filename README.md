@@ -223,7 +223,7 @@ const updateUI = function (acc) {
 };
 ```
 
-- Log out timer to log the current user out when they stay idle for 2 min
+- Log out timer to log the current user out when they idles for 2 min
 
 ```js
 // Logout count down timer function
@@ -246,7 +246,7 @@ const startLogOutTimer = function () {
     time--;
   };
 
-  // Set time to 5 min
+  // Set time to 2 min
   let time = 120;
   let owner = currentAccount;
 

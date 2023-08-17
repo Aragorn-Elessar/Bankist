@@ -236,7 +236,7 @@ const startLogOutTimer = function () {
     time--;
   };
 
-  // Set time to 5 min
+  // Set time to 2 min
   let time = 120;
   let owner = currentAccount;
 
@@ -388,6 +388,7 @@ btnClose.addEventListener('click', function deleteAccount(e) {
   inputClosePin.blur();
 });
 
+// TODO: maintain date on sorted movements
 // Sort movements in a descending order
 // reserve sort state to be false by default
 let sorted = false;
