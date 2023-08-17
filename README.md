@@ -456,13 +456,9 @@ btnSort.addEventListener('click', function (e) {
 });
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Author
 
 [Mahmoud Gadallah](https://github.com/Aragorn-Elessar)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Credits
 
