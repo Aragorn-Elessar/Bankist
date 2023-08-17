@@ -103,7 +103,6 @@ const formatMovementDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
 
   if (daysPassed === 0) return 'Today';
   else if (daysPassed === 1) return 'Yesterday';
@@ -225,8 +224,6 @@ const startLogOutTimer = function () {
 
     // In each call, print the remaining time to UI
     labelTimer.textContent = `${min}:${sec}`;
-
-    console.log('Ayo!');
 
     // When 0 seconds, stop timer and log out user
     if (time === 0 || owner !== currentAccount) {
